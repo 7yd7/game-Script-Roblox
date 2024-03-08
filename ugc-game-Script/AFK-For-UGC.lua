@@ -1,6 +1,8 @@
 --[[
 getgenv().AClick = true -- اوتو كليكر
 getgenv().ATokens = true -- اخذ كوين يلي موجوده في ماب
+getgenv().ASpin = true -- اخذ قيم باس Auto Spin
+loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/game-Script-Roblox/test/ugc-game-Script/AFK-For-UGC.lua"))()
 ]]
 
 
@@ -36,3 +38,40 @@ game:GetService("ReplicatedStorage").Events.Click:FireServer()
 end
 end
 end)()
+
+-- فري قيم باس Auto Spin gui
+
+if getgenv().ASpin == true then
+
+local player = game.Players.LocalPlayer
+local testGui = player.PlayerGui.MainGui.WheelFrame.Auto.ImageButton
+
+local isActive = false
+
+testGui.MouseButton1Down:Connect(function()
+    if isActive then
+    -- تم اغلاق سكربت
+        isActive = false
+        getgenv().ASpin1 = false
+    else
+-- تم تفعيل سكربت
+        isActive = true
+        getgenv().ASpin1 = true
+    end
+end)
+
+
+-- سكربت ASpin
+coroutine.wrap(function()
+    while wait(.2) do
+        if getgenv().ASpin1 == true then
+    
+local ohString1 = "Normal"
+
+game:GetService("ReplicatedStorage").Events.WheelSpin:FireServer(ohString1)
+    
+    end
+    end
+    end)()
+
+end
