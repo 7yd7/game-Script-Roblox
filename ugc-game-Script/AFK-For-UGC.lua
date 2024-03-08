@@ -6,7 +6,8 @@ getgenv().ATokens = true -- اخذ كوين يلي موجوده في ماب
 
 
 -- اخذ جميع اشياء يلي موجوده Tokens
-while wait(.2) do
+coroutine.wrap(function()
+while wait() do
 	if getgenv().ATokens == true then
         local tokensFolder = game.Workspace.Tokens
         local files = tokensFolder:GetChildren()
@@ -22,9 +23,11 @@ while wait(.2) do
         end
     end
 end
+end)()
 
 
 -- اوتو كليكر
+coroutine.wrap(function()
 while wait(.2) do
 	if getgenv().AClick == true then
 
@@ -32,3 +35,4 @@ game:GetService("ReplicatedStorage").Events.Click:FireServer()
 
 end
 end
+end)()
