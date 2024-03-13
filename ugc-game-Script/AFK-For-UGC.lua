@@ -1,14 +1,34 @@
 --[[
-getgenv().AClick = true -- اوتو كليكر
-getgenv().ATokens = true -- اخذ كوين يلي موجوده في ماب
-getgenv().ASpin = true -- اخذ قيم باس Auto Spin
 getgenv().AReblrth = true -- اوتو ريبر
 loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/game-Script-Roblox/test/ugc-game-Script/AFK-For-UGC.lua"))()
 ]]
 
+-- تغير رسايل ال قيم باس
+game:GetService("Players").LocalPlayer.PlayerGui.MainGui.ClickFrame.OPAUTO.Title.Text = "Unlock OP"
+game:GetService("Players").LocalPlayer.PlayerGui.MainGui.ClickFrame.ServerBoost.Title.Text = "Unlock OP"
 
+-- اخذ قيم باس Magnet
 
--- اخذ جميع اشياء يلي موجوده Tokens
+local player = game.Players.LocalPlayer
+local testGui = player.PlayerGui.MainGui.ClickFrame.ServerBoost.ImageButton
+
+local isActive = false
+
+testGui.MouseButton1Down:Connect(function()
+    if isActive then
+    -- تم اغلاق سكربت
+        isActive = false
+        getgenv().ATokens = false
+        game:GetService("Players").LocalPlayer.PlayerGui.MainGui.ClickFrame.ServerBoost.TextLabel.Text = "MAGNET"
+    else
+-- تم تفعيل سكربت
+        isActive = true
+        getgenv().ATokens = true
+        game:GetService("Players").LocalPlayer.PlayerGui.MainGui.ClickFrame.ServerBoost.TextLabel.Text = "On MAGNET"
+    end
+end)
+
+-- سكربت اخذ جميع كوين
 coroutine.wrap(function()
     while wait() do
         if getgenv().ATokens == true then
@@ -28,7 +48,27 @@ coroutine.wrap(function()
     end
     end)()
     
+    -- اخذ قيم باس OP Auto Clicker
+
+    local player = game.Players.LocalPlayer
+    local testGui = player.PlayerGui.MainGui.ClickFrame.OPAUTO.ImageButton
     
+    local isActive = false
+    
+    testGui.MouseButton1Down:Connect(function()
+        if isActive then
+        -- تم اغلاق سكربت
+            isActive = false
+            getgenv().AClick = false
+            game:GetService("Players").LocalPlayer.PlayerGui.MainGui.ClickFrame.OPAUTO.TextLabel.Text = "OP AUTO"
+        else
+    -- تم تفعيل سكربت
+            isActive = true
+            getgenv().AClick = true
+            game:GetService("Players").LocalPlayer.PlayerGui.MainGui.ClickFrame.OPAUTO.TextLabel.Text = "On OP AUTO"
+        end
+    end)
+
     -- اوتو كليكر
     coroutine.wrap(function()
     while wait(.2) do
@@ -56,7 +96,7 @@ game:GetService("ReplicatedStorage").Events.Rebirth:FireServer()
 
     -- فري قيم باس Auto Spin gui
     
-    if getgenv().ASpin == true then
+
     
     local player = game.Players.LocalPlayer
     local testGui = player.PlayerGui.MainGui.WheelFrame.Auto.ImageButton
@@ -88,7 +128,5 @@ game:GetService("ReplicatedStorage").Events.Rebirth:FireServer()
         end
         end
         end)()
-    
-    end
 
         
